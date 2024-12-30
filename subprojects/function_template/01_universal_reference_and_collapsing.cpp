@@ -1,0 +1,14 @@
+#include <iostream>
+
+// 万能引用
+// 如果 t 接受左值表达式，则 T 推导为左值引用;
+// 如果 t 接受右值表达式，则 T 推导为右值引用;
+template <typename T> void f(T &&t) {}
+
+int main() {
+  int a = 1;
+
+  // 引用折叠： 右值引用的右值引用折叠为右值引用，其余组合均为左值引用.
+  f(a); // T 的类型为 int&, T&& 推导为 int&
+  f(1); // T 的类型为 int&&, T&& 推导为 int&&
+}
