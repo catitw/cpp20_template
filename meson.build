@@ -4,6 +4,7 @@ project('cpp20_template', 'cpp',
 
 chapters = [
   'function_template',
+  'explicit_template_instantiation'
 ]
 
 foreach chapter : chapters
