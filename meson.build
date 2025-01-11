@@ -8,5 +8,5 @@ chapters = [
 ]
 
 foreach chapter : chapters
-  subproject(chapter)
+  subdir('chapters' / chapter)
 endforeach
