@@ -7,3 +7,5 @@
   {                                                                            \
     std::cout << std::format("{}\n", __PRETTY_FUNCTION__);                     \
   }
+
+std::string demangle(const char *mangled);

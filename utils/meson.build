@@ -1,5 +1,5 @@
 utils = library('utils', 
-    sources: [],
+    sources: ['signature.cpp'],
 )
 
 utils_dep = declare_dependency(
