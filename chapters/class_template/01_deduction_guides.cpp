@@ -29,7 +29,10 @@ template <typename Ty, std::size_t size> struct Array {
 template <typename T, typename... RestArgs>
 Array(T, RestArgs...) -> Array<T, sizeof...(RestArgs) + 1>;
 
-void test_Array() { Array arr{1, 2}; }
+void test_Array() {
+  [[maybe_unused]] Array arr{1, 2};
+  ;
+}
 
 int main() {
   test_X();
