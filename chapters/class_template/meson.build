@@ -10,5 +10,3 @@ foreach src : sources
     dependencies: [utils_dep]
   )
 endforeach
-
-subdir('class_template_instantiation')

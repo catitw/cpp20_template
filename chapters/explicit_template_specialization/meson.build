@@ -1,1 +1,2 @@
 subdir('function')
+subdir('class')
