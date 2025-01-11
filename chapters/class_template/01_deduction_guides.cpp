@@ -1,6 +1,5 @@
 #include "signature.h"
 #include <cstddef>
-#include <iostream>
 
 template <typename T> struct X {
   X(T val) : val{val} {}
@@ -14,10 +13,10 @@ X(int) -> X<std::size_t>;
 
 void test_X() {
   X x1{1}; // deducte to X<std::size_t>
-  std::cout << demangle(typeid(x1).name()) << '\n';
+  print_typename(x1);
 
   X x2{1l}; // X<long>
-  std::cout << demangle(typeid(x2).name()) << '\n';
+  print_typename(x2);
 }
 
 // ----------------------------------------------------------------------------
