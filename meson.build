@@ -6,7 +6,8 @@ chapters = [
   'function_template',
   'class_template',
   'variable_template',
-  'full_template_specialization'
+  'full_template_specialization',
+  'partial_specialization'
 ]
 
 subdir('utils')
