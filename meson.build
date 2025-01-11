@@ -7,6 +7,8 @@ chapters = [
   'explicit_template_instantiation'
 ]
 
+subdir('utils')
+
 foreach chapter : chapters
   subdir('chapters' / chapter)
 endforeach

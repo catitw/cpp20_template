@@ -1,3 +1,4 @@
+#include "signature.h"
 #include <iostream>
 #include <type_traits>
 
@@ -16,6 +17,7 @@ template <typename T1, typename T2,
           typename R = decltype(true ? T1{} : T2{}) // 不求值语境
           >
 R max_v2(const T1 &a, const T2 &b) {
+  PRINT_FUNC_SIGNATURE();
   return a > b ? a : b;
 }
 
@@ -28,14 +30,21 @@ auto max_v3(const T1 &a, const T2 &b)
                               // 而上面的写法，返回值类型是 T1{} or T2{},
                               // 不可能有CV限定符
 {
+  PRINT_FUNC_SIGNATURE();
   return a > b ? a : b;
 }
 
 // C++14, 返回值类型无CV限定
-auto max_v4(const auto &a, const auto &b) { return a > b ? a : b; }
+auto max_v4(const auto &a, const auto &b) {
+  PRINT_FUNC_SIGNATURE();
+  return a > b ? a : b;
+}
 
 // C++14, 返回值类型具有CV限定
-decltype(auto) max_v5(const auto &a, const auto &b) { return a > b ? a : b; }
+decltype(auto) max_v5(const auto &a, const auto &b) {
+  PRINT_FUNC_SIGNATURE();
+  return a > b ? a : b;
+}
 
 void decltype_trick() {
   using T1 = decltype(true ? 1 : 1.2);

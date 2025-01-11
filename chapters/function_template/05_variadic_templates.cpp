@@ -1,11 +1,11 @@
-
-
+#include "signature.h"
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
 #include <iterator>
 #include <numeric>
 #include <type_traits>
+
 void helper_f1(const char *, int) { std::cout << "f1" << '\n'; }
 void helper_f1(const char **, int *) { std::cout << "&f1" << '\n'; }
 
@@ -13,12 +13,14 @@ void helper_f1(const char **, int *) { std::cout << "&f1" << '\n'; }
 // args: 函数形参包，存储实参
 // args... : 展开实参
 template <typename... Args> void f1(Args... args) {
+  PRINT_FUNC_SIGNATURE();
+
   helper_f1(args...);  // print "f1"
   helper_f1(&args...); // print "&f1"
 }
 
 void test_f1() {
-  f1("abc", 1);
+  f1("abc", 1); // void f1(Args ...) [with Args = {const char*, int}]
 
   // error: no matching function for call to ‘helper_f1(const char*&, int&,
   // int&)’
@@ -27,6 +29,7 @@ void test_f1() {
 
 // `...`之前的`const Args&`称之为模式，每一次替换都遵循模式
 template <typename... Args> void print(const Args &...args) {
+  PRINT_FUNC_SIGNATURE();
 
   // 此处的模式为 `(std::cout << args << ' ', 0)`
   int _[]{(std::cout << args << ' ', 0)...};
@@ -41,19 +44,23 @@ template <typename... Args> void print(const Args &...args) {
 }
 
 void test_print() {
-  // print "abc 1 1.2"
-  print("abc", 1, 1.2);
+  // void print(const Args& ...) [with Args = {char [4], int, double}
+  print("abc", 1, 1.2); // print "abc 1 1.2"
 }
 
+// array是对内建数组类型的变量的引用
 template <typename T, std::size_t N, typename... Args>
-void f3(const T (&array)[N],
-        Args... index) { // array是对内建数组类型的变量的引用
+void f3(const T (&array)[N], Args... index) {
+  PRINT_FUNC_SIGNATURE();
+
   // 此处的模式为 `array[index]
   print(array[index]...);
 }
 
 void test_f3() {
   int array[]{1, 2, 3};
+  // void f3(const T (&)[N], Args ...) [with T = int; long unsigned int N = 3;
+  // Args = {int, int}]
   f3(array, 0, 2); // T=int, N=3
 
   {
@@ -67,6 +74,7 @@ void test_f3() {
 
 template <typename... Args, typename R = std::common_type_t<Args...>>
 R sum_v1(const Args &...args) {
+  PRINT_FUNC_SIGNATURE();
 
   R arr[]{static_cast<R>(args)...};
   R s{};
@@ -80,12 +88,17 @@ R sum_v1(const Args &...args) {
 
 template <typename... Args, typename R = std::common_type_t<Args...>>
 R sum_v2(const Args &...args) {
+  PRINT_FUNC_SIGNATURE();
+
   R _[]{static_cast<R>(args)...};
   return std::accumulate(std::begin(_), std::end(_), R{}); // `R{}` 为初始值
 }
 
 void test_sum() {
+  // R sum_v1(const Args& ...) [with Args = {int, int, double}; R = double]
   std::cout << sum_v1(1, 1, 1.1) << '\n';
+
+  // R sum_v2(const Args& ...) [with Args = {int, int, double}; R = double]
   std::cout << sum_v2(1, 1, 1.1) << '\n';
 }
 

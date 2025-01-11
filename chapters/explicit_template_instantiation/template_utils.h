@@ -7,4 +7,4 @@ template <typename T> void internal_link_func(T t) {
 
 template <typename T> void explicit_func(T t);
 
-extern template void explicit_func<int>(int);
+extern template void explicit_func<>(int);

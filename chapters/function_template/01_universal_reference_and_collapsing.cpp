@@ -1,11 +1,11 @@
-#include <format>
+#include "signature.h"
 #include <iostream>
 
 // 万能引用
 // 如果 t 接受左值表达式，则 T 推导为左值引用;
 // 如果 t 接受右值表达式，则 T 推导为右值引用;
 template <typename T> void f(T &&t) {
-  std::cout << std::format("Function signature: {}\n", __PRETTY_FUNCTION__);
+  PRINT_FUNC_SIGNATURE();
 
   // 判断是左值还是右值
   if (std::is_lvalue_reference<decltype(t)>::value) {
