@@ -4,7 +4,8 @@ project('cpp20_template', 'cpp',
 
 chapters = [
   'function_template',
-  'class_template'
+  'class_template',
+  'variable_template'
 ]
 
 subdir('utils')
