@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 
 template <typename T> void internal_link_func(T t) {
