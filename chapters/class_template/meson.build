@@ -1,4 +1,7 @@
-sources = run_command('find', '.', '-name', '*.cpp', check: true).stdout().strip().split('\n')
+sources = run_command(
+    'find', '.', '-maxdepth', '1', '-name', '*.cpp', 
+    check: true
+  ).stdout().strip().split('\n')
 
 foreach src : sources
   executable(
@@ -7,3 +10,5 @@ foreach src : sources
     dependencies: [utils_dep]
   )
 endforeach
+
+subdir('class_template_instantiation')
