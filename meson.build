@@ -9,7 +9,8 @@ chapters = [
   'full_template_specialization',
   'partial_specialization',
   'explicit_template_specialization',
-  'fold_expression'
+  'fold_expression',
+  'dependent_name'
 ]
 
 subdir('utils')
