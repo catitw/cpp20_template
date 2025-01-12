@@ -1,0 +1,2 @@
+subdir('mylib')
+subdir('client')
