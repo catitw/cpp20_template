@@ -10,7 +10,8 @@ chapters = [
   'partial_specialization',
   'explicit_template_specialization',
   'fold_expression',
-  'dependent_name'
+  'dependent_name',
+  'SFINAE'
 ]
 
 subdir('utils')
