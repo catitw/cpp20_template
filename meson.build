@@ -11,7 +11,8 @@ chapters = [
   'explicit_template_specialization',
   'fold_expression',
   'dependent_name',
-  'SFINAE'
+  'SFINAE',
+  'concept_and_requires'
 ]
 
 subdir('utils')
