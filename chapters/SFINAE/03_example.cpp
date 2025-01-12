@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 
 // 该函数模板要求传入的对象必须是支持 operator+
 template <typename T>
